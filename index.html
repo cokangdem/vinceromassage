@@ -1,82 +1,85 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Bio-Link — Simple</title>
-  <link rel="icon" href="assets/favicon.png">
-  <link rel="stylesheet" href="css/styles.css"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bio‑Link — Thème Neon Grid</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css" />
 </head>
 <body>
   <header class="hero">
     <div class="avatar" aria-hidden="true">avatar</div>
-    <h1>Prénom Nom</h1>
-    <p class="subtitle">Thérapeute bien-être — massages sur RDV.</p>
+    <h1 id="hero-name">Prénom Nom</h1>
+    <p id="hero-tagline">Thérapeute bien‑être — massages sur RDV.</p>
     <nav class="socials">
-      <a href="#" target="_blank" rel="noopener">Instagram</a>
-      <a href="#" target="_blank" rel="noopener">X / Twitter</a>
-      <a href="#" target="_blank" rel="noopener">YouTube</a>
+      <a href="#" class="chip">Instagram</a>
+      <a href="#" class="chip">X / Twitter</a>
+      <a href="#" class="chip">YouTube</a>
     </nav>
   </header>
 
-  <main class="grid">
-    <section class="card card--wide" id="visitsCard">
-      <div class="card-title">Visits</div>
-      <div class="card-value" id="visitsValue">—</div>
+  <main class="grid" id="cards-grid">
+    <section class="card" id="card-visits" data-label="Visits">
+      <div class="meta">Visits</div>
+      <div class="value" id="visits-value">—</div>
     </section>
 
-    <section class="card">
-      <div class="card-title">Localisation</div>
-      <div class="card-value">Paris (11e)</div>
+    <section class="card" id="card-location" data-label="Localisation">
+      <div class="meta">Localisation</div>
+      <div class="value" id="location-value">Paris (11e)</div>
     </section>
 
-    <section class="card">
-      <div class="card-title">Années d'expérience</div>
-      <div class="card-value">10+ ans</div>
+    <section class="card" id="card-experience" data-label="Années d'expérience">
+      <div class="meta">Années d'expérience</div>
+      <div class="value" id="exp-value">10+ ans</div>
     </section>
 
-    <section class="card card--pink">
-      <div class="card-title">Styles</div>
-      <div class="card-value">Deep Tissue · Suédois</div>
+    <section class="card accent" id="card-styles" data-label="Styles">
+      <div class="meta">Styles</div>
+      <div class="value" id="styles-value">Deep Tissue · Suédois</div>
     </section>
 
-    <section class="card">
-      <div class="card-title">Formation</div>
-      <div class="card-value">École X • 2013</div>
+    <section class="card" id="card-education" data-label="Formation">
+      <div class="meta">Formation</div>
+      <div class="value" id="edu-value">École X • 2013</div>
     </section>
 
-    <section class="card card--wide" id="commentsCard">
-      <div class="card-title">Commentaires <span id="commentsCount" class="badge">0</span></div>
+    <section class="card" id="card-commentsCount" data-label="Commentaires">
+      <div class="meta">Commentaires</div>
+      <div class="value" id="comments-count">0</div>
+    </section>
 
-      <ul id="commentsList" class="comments"></ul>
+    <section class="card phone" id="card-phone" data-label="Téléphone protégé">
+      <div class="meta">Téléphone protégé</div>
+      <div class="phone-ui">
+        <form id="phone-form">
+          <label for="phone-captcha" class="sr">Anti‑spam</label>
+          <input id="phone-captcha" placeholder="3 + 4 = ?" inputmode="numeric" />
+          <button type="submit" class="chip">Afficher</button>
+        </form>
+        <output id="phone-out">**********</output>
+      </div>
+    </section>
 
-      <form id="commentForm" class="comment-form" autocomplete="off">
-        <div class="row">
-          <input type="text" id="name" name="name" placeholder="Votre nom" required maxlength="40">
-        </div>
-        <div class="row">
-          <textarea id="message" name="message" placeholder="Votre message" required minlength="3" maxlength="600"></textarea>
-        </div>
-        <div class="row right">
-          <button type="submit" id="submitBtn">Publier</button>
-        </div>
-        <p id="formStatus" class="status" role="status" aria-live="polite"></p>
+    <section class="card full" id="card-comments">
+      <div class="meta">Avis & commentaires</div>
+      <div id="comments-list" class="comments"></div>
+      <form id="comment-form" autocomplete="off" class="comment-form">
+        <input name="name" id="comment-name" placeholder="Votre nom" />
+        <textarea name="message" id="comment-message" placeholder="Votre message"></textarea>
+        <button class="btn-grad" type="submit">Publier</button>
       </form>
-
       <div class="pager">
-        <button id="prevPage" disabled>←</button>
-        <span id="pageInfo">1</span>
-        <button id="nextPage" disabled>→</button>
+        <button class="chip" id="prev-page" disabled>←</button>
+        <span id="page-indicator">1</span>
+        <button class="chip" id="next-page" disabled>→</button>
       </div>
     </section>
   </main>
 
-  <footer class="footer">
-    <button id="themeToggle" class="theme-toggle">⛅ Thème</button>
-  </footer>
-
-  <script src="js/config.js"></script>
-  <script src="js/comments.js"></script>
-  <script src="js/app.js"></script>
+  <script src="/js/theme.js"></script>
 </body>
 </html>
