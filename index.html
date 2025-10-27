@@ -1,85 +1,81 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Bio‑Link — Thème Neon Grid</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./css/styles.css" />
+  <title>Bio-Link</title>
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
   <header class="hero">
-    <div class="avatar" aria-hidden="true">avatar</div>
-    <h1 id="hero-name">Prénom Nom</h1>
-    <p id="hero-tagline">Thérapeute bien‑être — massages sur RDV.</p>
-    <nav class="socials">
-      <a href="#" class="chip">Instagram</a>
-      <a href="#" class="chip">X / Twitter</a>
-      <a href="#" class="chip">YouTube</a>
-    </nav>
+    <div class="avatar">avatar</div>
+    <h1>Prénom Nom</h1>
+    <p class="subtitle">Thérapeute bien-être — massages sur RDV.</p>
+    <div class="links">
+      <a href="#" class="pill">Instagram</a>
+      <a href="#" class="pill">X / Twitter</a>
+      <a href="#" class="pill">YouTube</a>
+    </div>
   </header>
 
-  <main class="grid" id="cards-grid">
-    <section class="card" id="card-visits" data-label="Visits">
-      <div class="meta">Visits</div>
-      <div class="value" id="visits-value">—</div>
+  <main class="grid">
+    <section class="card span-12" id="visits-card">
+      <div class="card-title">Visits</div>
+      <div class="card-value" id="visits-value">—</div>
     </section>
 
-    <section class="card" id="card-location" data-label="Localisation">
-      <div class="meta">Localisation</div>
-      <div class="value" id="location-value">Paris (11e)</div>
+    <section class="card span-6">
+      <div class="card-title">Localisation</div>
+      <div class="card-value">Paris (11e)</div>
     </section>
 
-    <section class="card" id="card-experience" data-label="Années d'expérience">
-      <div class="meta">Années d'expérience</div>
-      <div class="value" id="exp-value">10+ ans</div>
+    <section class="card span-6">
+      <div class="card-title">Années d'expérience</div>
+      <div class="card-value">10+ ans</div>
     </section>
 
-    <section class="card accent" id="card-styles" data-label="Styles">
-      <div class="meta">Styles</div>
-      <div class="value" id="styles-value">Deep Tissue · Suédois</div>
+    <section class="card span-6 accent">
+      <div class="card-title">Styles</div>
+      <div class="card-value">Deep Tissue • Suédois</div>
     </section>
 
-    <section class="card" id="card-education" data-label="Formation">
-      <div class="meta">Formation</div>
-      <div class="value" id="edu-value">École X • 2013</div>
+    <section class="card span-6">
+      <div class="card-title">Formation</div>
+      <div class="card-value">École X • 2013</div>
     </section>
 
-    <section class="card" id="card-commentsCount" data-label="Commentaires">
-      <div class="meta">Commentaires</div>
-      <div class="value" id="comments-count">0</div>
-    </section>
-
-    <section class="card phone" id="card-phone" data-label="Téléphone protégé">
-      <div class="meta">Téléphone protégé</div>
-      <div class="phone-ui">
-        <form id="phone-form">
-          <label for="phone-captcha" class="sr">Anti‑spam</label>
-          <input id="phone-captcha" placeholder="3 + 4 = ?" inputmode="numeric" />
-          <button type="submit" class="chip">Afficher</button>
-        </form>
-        <output id="phone-out">**********</output>
-      </div>
-    </section>
-
-    <section class="card full" id="card-comments">
-      <div class="meta">Avis & commentaires</div>
-      <div id="comments-list" class="comments"></div>
-      <form id="comment-form" autocomplete="off" class="comment-form">
-        <input name="name" id="comment-name" placeholder="Votre nom" />
-        <textarea name="message" id="comment-message" placeholder="Votre message"></textarea>
-        <button class="btn-grad" type="submit">Publier</button>
+    <!-- Téléphone protégé -->
+    <section class="card span-6" id="phone-card">
+      <div class="card-title">Téléphone (protégé)</div>
+      <form id="phone-form" class="phone-form">
+        <label class="captcha">
+          <span>3 + 4 = ?</span>
+          <input id="phone-captcha" type="text" inputmode="numeric" autocomplete="off" />
+        </label>
+        <button type="submit" class="pill">Afficher</button>
       </form>
-      <div class="pager">
-        <button class="chip" id="prev-page" disabled>←</button>
-        <span id="page-indicator">1</span>
-        <button class="chip" id="next-page" disabled>→</button>
-      </div>
+      <div id="phone-out" class="card-value phone-out"> </div>
+    </section>
+
+    <!-- Commentaires -->
+    <section class="card span-12" id="comments-card">
+      <div class="card-title">Commentaires <span id="comments-count" class="badge">0</span></div>
+
+      <div id="comments-list" class="comments-list"></div>
+
+      <form id="comment-form" class="comment-form">
+        <input name="name" placeholder="Votre nom" />
+        <textarea name="message" placeholder="Votre message"></textarea>
+        <div class="pager">
+          <button type="button" id="prev-page" class="ghost">←</button>
+          <span id="page-indicator">1</span>
+          <button type="button" id="next-page" class="ghost">→</button>
+        </div>
+        <button class="pill" type="submit">Publier</button>
+      </form>
     </section>
   </main>
 
-  <script src="./js/theme.js"></script>
+  <script type="module" src="js/main.js"></script>
 </body>
 </html>
