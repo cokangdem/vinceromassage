@@ -4,10 +4,10 @@
 // ===============================
 
 // 1) METS ICI TON URL Apps Script (celle en /exec)
-export const API_BASE = 'https://script.google.com/macros/s/AKfycby4boZDz6kQBd4Kurt5__CqgeRJfl1TQBOHb_o6isUBap1yFfYPyGcohuvkHNxwTdCM/exec';
+export const API_BASE = 'https://script.google.com/macros/s/AKfycbyhLrjCyxWo0QbI43CE8fYCrc6d0whTfIEkUj09WW94nU2GonKCgOhI7BiM9fZS3sp2LA/exec';
 
 // 2) Pagination des commentaires
-export const COMMENTS_PER_PAGE = 6;
+export const PER_PAGE = 6;
 
 // 3) ID anonyme pour différencier les visiteurs (pas perso)
 export function getCID() {
