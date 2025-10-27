@@ -1,30 +1,24 @@
 // js/phone.js
-import { fetchJSON, getCID } from './config.js';
-
-// HTML attendu :
-// <form id="phone-form">
-//   <input id="phone-captcha" ...>
-//   <button type="submit">Afficher</button>
-// </form>
-// <div id="phone-out"></div>
-
-export function initPhone() {
+(function(){
   const form = document.getElementById('phone-form');
-  const out  = document.getElementById('phone-out');
-  if (!form || !out) return;
+  const input = document.getElementById('phone-captcha');
+  const out   = document.getElementById('phone-out');
 
-  form.addEventListener('submit', async (e) => {
+  if (!form) return;
+
+  form.addEventListener('submit', async (e)=>{
     e.preventDefault();
-    const answer = (document.getElementById('phone-captcha')?.value || '').trim();
-    out.textContent = '...';
-
+    out.textContent = '…';
     try {
-      // Côté Apps Script, action 'reveal' doit retourner { ok:true, phone:'...' }
-      const data = await fetchJSON({ action: 'reveal', answer, cid: getCID() });
-      out.textContent = data?.ok ? (data.phone || '—') : (data?.error || 'Erreur');
-    } catch (err) {
-      console.error(err);
+      const res = await fetch(window.CONFIG.PHONE_API, {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ captcha: (input.value||'').trim(), origin: location.origin })
+      });
+      const json = await res.json();
+      out.textContent = json.ok ? json.phone : 'Erreur réseau';
+    } catch(err){
       out.textContent = 'Erreur réseau';
     }
   });
-}
+})();

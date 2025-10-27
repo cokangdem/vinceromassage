@@ -1,124 +1,74 @@
 // js/comments.js
-import { fetchJSON, getCID, COMMENTS_PER_PAGE } from './config.js';
+(function(){
+  const API = window.CONFIG.COMMENTS_API;
+  const listEl   = document.getElementById('comments-list');
+  const countEl  = document.getElementById('comments-count');
+  const form     = document.getElementById('comment-form');
+  const nameIn   = document.getElementById('comment-name');
+  const msgIn    = document.getElementById('comment-message');
+  const prevBtn  = document.getElementById('prev-page');
+  const nextBtn  = document.getElementById('next-page');
+  const pageInd  = document.getElementById('page-indicator');
 
-// HTML attendu :
-// <form id="comment-form">
-//   <input id="comment-name" ...>
-//   <textarea id="comment-message"></textarea>
-//   <button type="submit">Publier</button>
-// </form>
-// <div id="comments-list"></div>
-// <span id="comments-count">0</span>
-// <button id="prev-page">←</button> <span id="page-current">1</span> <button id="next-page">→</button>
+  let page = 1, per = 6, total = 0;
 
-let page = 1;
-let total = 0;
-
-export async function initComments() {
-  const form   = document.getElementById('comment-form');
-  const prevBt = document.getElementById('prev-page');
-  const nextBt = document.getElementById('next-page');
-
-  await refreshComments();
-
-  if (form) {
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      await addComment();
+  async function fetchJSON(url, opt){
+    const r = await fetch(url, opt);
+    return r.json();
+  }
+  function render(items){
+    listEl.innerHTML = '';
+    items.forEach(x=>{
+      const div = document.createElement('div');
+      div.className = 'comment';
+      div.innerHTML = `<div class="who">${x.name} · ${x.date||''}</div><div class="msg"></div>`;
+      div.querySelector('.msg').textContent = x.message||'';
+      listEl.appendChild(div);
     });
   }
-
-  if (prevBt) prevBt.addEventListener('click', async () => {
-    if (page > 1) { page--; await refreshComments(); }
-  });
-
-  if (nextBt) nextBt.addEventListener('click', async () => {
-    const maxPage = Math.max(1, Math.ceil(total / COMMENTS_PER_PAGE));
-    if (page < maxPage) { page++; await refreshComments(); }
-  });
-}
-
-async function refreshComments() {
-  await Promise.all([updateCount(), listPage()]);
-  updatePager();
-}
-
-async function updateCount() {
-  const badge = document.getElementById('comments-count');
-  try {
-    const data = await fetchJSON({ action: 'count' });
-    total = data?.ok ? Number(data.total || 0) : 0;
-    if (badge) badge.textContent = String(total);
-  } catch (e) {
-    console.error(e);
-  }
-}
-
-async function listPage() {
-  const listEl = document.getElementById('comments-list');
-  if (!listEl) return;
-  listEl.innerHTML = '…';
-
-  try {
-    const data = await fetchJSON({ action: 'list', page, pageSize: COMMENTS_PER_PAGE });
-    if (!data?.ok) { listEl.textContent = 'Erreur'; return; }
-
-    const items = data.items || [];
-    if (!items.length) { listEl.textContent = 'Aucun commentaire'; return; }
-
-    listEl.innerHTML = items.map(r => renderComment(r)).join('');
-  } catch (e) {
-    console.error(e);
-    listEl.textContent = 'Erreur réseau';
-  }
-}
-
-function renderComment(r) {
-  const name = escapeHtml(r.name || 'Anonyme');
-  const msg  = escapeHtml(r.message || '');
-  const ts   = r.timestamp ? new Date(r.timestamp).toLocaleString() : '';
-  return `
-    <div class="comment">
-      <div class="comment-meta">${name} — <span class="comment-date">${ts}</span></div>
-      <div class="comment-body">${msg}</div>
-    </div>`;
-}
-
-async function addComment() {
-  const nameEl = document.getElementById('comment-name');
-  const msgEl  = document.getElementById('comment-message');
-  if (!nameEl || !msgEl) return;
-
-  const name = nameEl.value.trim();
-  const message = msgEl.value.trim();
-  if (!name || !message) return;
-
-  try {
-    const data = await fetchJSON({ action: 'add', name, message, cid: getCID() });
-    if (data?.ok) {
-      msgEl.value = '';
-      // Recharge la page 1 par défaut (ou reste sur la page courante)
-      page = 1;
-      await refreshComments();
-    } else {
-      alert(data?.error || 'Erreur');
+  async function load(){
+    try{
+      const data = await fetchJSON(`${API}?action=list&page=${page}&per=${per}`);
+      if(!data.ok) throw new Error(data.error||'');
+      total = data.total||0;
+      render(data.items||[]);
+      if (countEl) countEl.textContent = String(total);
+      updatePager();
+    }catch(e){
+      listEl.innerHTML = '<div class="empty">Erreur réseau</div>';
+      if (countEl) countEl.textContent = '0';
     }
-  } catch (e) {
-    console.error(e);
-    alert('Erreur réseau');
   }
-}
+  function updatePager(){
+    pageInd && (pageInd.textContent = String(page));
+    prevBtn && (prevBtn.disabled = page<=1);
+    const maxPage = Math.max(1, Math.ceil(total/Math.max(1,per)));
+    nextBtn && (nextBtn.disabled = page>=maxPage);
+  }
 
-function updatePager() {
-  const cur = document.getElementById('page-current');
-  const maxPage = Math.max(1, Math.ceil(total / COMMENTS_PER_PAGE));
-  if (cur) cur.textContent = String(page) + (maxPage > 1 ? ` / ${maxPage}` : '');
-}
+  form && form.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    const name = (nameIn.value||'').trim();
+    const message = (msgIn.value||'').trim();
+    if(!message) return;
+    try{
+      const res = await fetch(API, {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ name, message })
+      });
+      const json = await res.json();
+      if(!json.ok) throw 0;
+      nameIn.value = ''; msgIn.value = '';
+      page = 1; // remonter au début
+      await load();
+    }catch(e){
+      alert('Impossible de publier pour le moment.');
+    }
+  });
 
-// Petite protection XSS
-function escapeHtml(str) {
-  return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;');
-}
+  prevBtn && prevBtn.addEventListener('click', ()=>{ if(page>1){page--; load();} });
+  nextBtn && nextBtn.addEventListener('click', ()=>{ page++; load(); });
+
+  load();
+})();
