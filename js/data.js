@@ -3,7 +3,7 @@ export const SITE = {
   brandSubtitle: 'Bien-être & Équilibre',
   practitionerName: 'Vincent',
   phoneDisplay: '06 38 20 23 99',
-  phoneInternational: '33612345678',
+  phoneInternational: '33638202399',
   telegramUsername: '@vincero_massage',
   location: 'Vienne (38200)',
   experience: 'Plus de 15 ans d’expérience.',
