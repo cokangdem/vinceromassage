@@ -3,16 +3,51 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Massage+ : massages bien-être sur rendez-vous à Vienne (38200).">
-  <title>Massage+ — Bien-être & Équilibre</title>
+  <meta name="description" content="Massage+ : espace de détente et de massage bien-être pour hommes sur rendez-vous à Vienne (38200).">
+  <title>Massage+ — Détente & présence</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/styles.css">
+
+  <style>
+    .rating-picker {
+      display: flex;
+      align-items: center;
+      gap: .35rem;
+      flex-wrap: wrap;
+      margin: 1rem 0;
+    }
+
+    .rating-picker span {
+      margin-right: .5rem;
+      color: var(--muted, #66705f);
+    }
+
+    .rating-picker button {
+      border: 0;
+      background: transparent;
+      font-size: 1.6rem;
+      line-height: 1;
+      cursor: pointer;
+      opacity: .35;
+      color: #b88923;
+      padding: .15rem;
+    }
+
+    .rating-picker button.active {
+      opacity: 1;
+    }
+
+    .empty-reviews {
+      color: var(--muted, #66705f);
+      margin: 1rem 0;
+    }
+  </style>
 </head>
 <body>
 <header class="topbar">
   <a class="brand" href="#accueil"><img src="assets/favicon.svg" alt=""><span><strong id="brand-name">Massage+</strong><small id="brand-subtitle">Bien-être & Équilibre</small></span></a>
   <button class="menu-button" id="menu-button" aria-label="Ouvrir le menu">☰</button>
-  <nav id="nav"><a href="#accueil">Accueil</a><a href="#apropos">À propos</a><a href="#massages">Massages</a><a href="#avis">Avis</a><a href="#contact">Contact</a></nav>
+  <nav id="nav"><a href="#accueil">Accueil</a><a href="#apropos">À propos</a><a href="#massages">Approche</a><a href="#avis">Retours</a><a href="#contact">Contact</a></nav>
 </header>
 <main>
   <section class="hero" id="accueil">
@@ -31,8 +66,52 @@
     <article><span>✨</span><h3>Expérience</h3><p id="experience-card">Plus de 10 ans d'expérience.</p></article>
   </section>
   <section class="section split" id="apropos"><div><p class="eyebrow">À propos</p><h2 id="about-title">Une séance simple, claire et respectueuse.</h2><p id="about-text">Je propose des massages bien-être sur rendez-vous, avec une attention portée à la détente, au confort et à la qualité de présence.</p></div><div class="soft-card"><h3>Cadre</h3><ul id="framework-list"></ul></div></section>
-  <section class="section" id="massages"><p class="eyebrow">Massages</p><h2>Prestations proposées</h2><div class="cards" id="services"></div></section>
-  <section class="section reviews-contact" id="avis"><div><p class="eyebrow">Avis clients</p><h2>Retours d’expérience</h2><div class="rating-line"><span class="stars">★★★★★</span><span id="review-summary">Avis affichés depuis Google Sheets ou exemples locaux.</span></div><div class="reviews" id="reviews-list"></div><form class="review-form" id="review-form"><h3>Laisser un avis</h3><input id="review-name" maxlength="40" placeholder="Votre prénom" autocomplete="name"><textarea id="review-message" maxlength="700" placeholder="Votre message"></textarea><button class="btn primary" type="submit">Publier</button><p class="form-status" id="review-status"></p></form></div><aside class="contact-card" id="contact"><h2>Me contacter</h2><p id="contact-name">Massage+</p><a class="phone" id="phone-link" href="#">06 12 34 56 78</a><div class="contact-buttons"><a class="btn primary" id="whatsapp-link" href="#">WhatsApp</a><a class="btn telegram" id="telegram-link" href="#">Telegram</a><a class="btn ghost" id="call-link" href="#">Appeler</a></div><p class="small" id="contact-note">Réponse rapide — sur rendez-vous.</p></aside></section>
+  <section class="section" id="massages"><p class="eyebrow">Approche</p><h2>Ce que je propose</h2><div class="cards" id="services"></div></section>
+  <section class="section reviews-contact" id="avis">
+    <div>
+      <p class="eyebrow">Retours</p>
+      <h2>Retours d’expérience</h2>
+      <div class="rating-line">
+        <span class="stars" id="review-average">☆☆☆☆☆</span>
+        <span id="review-summary">Chargement des retours…</span>
+      </div>
+
+      <div class="reviews" id="reviews-list"></div>
+
+      <form class="review-form" id="review-form">
+        <h3>Laisser un retour</h3>
+        <p class="small">Les retours sont affichés après validation.</p>
+
+        <input id="review-name" maxlength="40" placeholder="Votre prénom" autocomplete="name">
+
+        <div class="rating-picker" id="rating-picker" aria-label="Choisir une note">
+          <span>Votre note</span>
+          <button type="button" data-rating="1" aria-label="1 étoile">★</button>
+          <button type="button" data-rating="2" aria-label="2 étoiles">★</button>
+          <button type="button" data-rating="3" aria-label="3 étoiles">★</button>
+          <button type="button" data-rating="4" aria-label="4 étoiles">★</button>
+          <button type="button" data-rating="5" aria-label="5 étoiles">★</button>
+        </div>
+        <input type="hidden" id="review-rating" value="5">
+
+        <textarea id="review-message" maxlength="700" placeholder="Votre message"></textarea>
+        <button class="btn primary" type="submit">Envoyer</button>
+        <p class="form-status" id="review-status"></p>
+      </form>
+    </div>
+
+    <aside class="contact-card" id="contact">
+      <h2>Me contacter</h2>
+      <p id="contact-name">Massage+</p>
+      <a class="phone" id="phone-link" href="#">06 38 20 23 99</a>
+      <div class="contact-buttons">
+        <a class="btn primary" id="whatsapp-link" href="#">WhatsApp</a>
+        <a class="btn telegram" id="telegram-link" href="#">Telegram</a>
+        <a class="btn ghost" id="call-link" href="#">Appeler</a>
+      </div>
+      <p class="small" id="contact-note">Réponse rapide — sur rendez-vous.</p>
+    </aside>
+  </section>
 </main>
 <footer><span id="footer-name">Massage+</span> — <span id="year"></span> · Tous droits réservés.</footer>
 <script type="module" src="js/main.js"></script>
