@@ -1,216 +1,165 @@
-import { SITE } from './data.js';
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Massage+ : espace personnel de détente et de massage bien-être à Vienne (38200).">
+  <title>Massage+ — Détente & présence</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
 
-const $ = (s) => document.querySelector(s);
+<body>
+<header class="topbar">
+  <a class="brand" href="#accueil">
+    <img src="assets/favicon.svg" alt="">
+    <span>
+      <strong id="brand-name">Massage+</strong>
+      <small id="brand-subtitle">Détente, présence et bienveillance</small>
+    </span>
+  </a>
 
-let selectedRating = 5;
+  <button class="menu-button" id="menu-button" aria-label="Ouvrir le menu">☰</button>
 
-function setText(id, text) {
-  const el = $(id);
-  if (el) el.textContent = text;
-}
+  <nav id="nav">
+    <a href="#accueil">Accueil</a>
+    <a href="#apropos">À propos</a>
+    <a href="#approche">Approche</a>
+    <a href="#avis">Retours</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
 
-function telHref() {
-  return 'tel:+' + SITE.phoneInternational.replace(/\D/g, '');
-}
+<main>
+  <section class="hero compact-hero" id="accueil">
+    <div class="hero-text">
+      <p class="eyebrow" id="hero-kicker">Sur rendez-vous à Vienne</p>
+      <h1 id="hero-title">Un espace de détente pensé pour les hommes.</h1>
+      <p id="hero-text">
+        Je propose des massages bien-être dans un cadre calme, respectueux et bienveillant.
+      </p>
 
-function whatsappHref() {
-  return (
-    'https://wa.me/' +
-    SITE.phoneInternational.replace(/\D/g, '') +
-    '?text=' +
-    encodeURIComponent('Bonjour, je vous contacte pour prendre rendez-vous pour un massage.')
-  );
-}
+      <div class="cta-row">
+        <a class="btn primary" id="cta-whatsapp" href="#">Prendre contact</a>
+        <a class="btn ghost" href="#apropos">Découvrir l’approche</a>
+      </div>
+    </div>
 
-function telegramHref() {
-  return 'https://t.me/' + SITE.telegramUsername.replace('@', '');
-}
+    <div class="hero-panel" aria-label="Informations principales">
+      <p class="hero-panel-title">Massage bien-être</p>
+      <p>🌿 Détente</p>
+      <p>👐 Écoute</p>
+      <p>📍 <span id="location-card">Vienne (38200)</span></p>
+      <p>🌈 Accueil gay-friendly</p>
+    </div>
+  </section>
 
-function stars(rating = 5) {
-  const n = Math.max(1, Math.min(5, Number(rating) || 5));
-  return '★★★★★'.slice(0, n) + '☆☆☆☆☆'.slice(0, 5 - n);
-}
+  <section class="features small-features" aria-label="Informations rapides">
+    <article>
+      <span>🌿</span>
+      <h3>Détente</h3>
+      <p>Un moment pour ralentir et relâcher les tensions.</p>
+    </article>
 
-function fillSite() {
-  setText('#brand-name', SITE.brandName);
-  setText('#brand-subtitle', SITE.brandSubtitle);
-  setText('#footer-name', SITE.brandName);
-  setText('#hero-kicker', SITE.heroKicker);
-  setText('#hero-title', SITE.heroTitle);
-  setText('#hero-text', SITE.heroText);
-  setText('#about-title', SITE.aboutTitle);
-  setText('#about-text', SITE.aboutText);
-  setText('#location-card', SITE.location);
-  setText('#experience-card', SITE.experience);
-  setText('#contact-name', SITE.practitionerName || SITE.brandName);
-  setText('#contact-note', SITE.contactNote);
-  setText('#year', new Date().getFullYear());
+    <article>
+      <span>👐</span>
+      <h3>Présence</h3>
+      <p>Une écoute simple, calme et attentive.</p>
+    </article>
 
-  const phone = $('#phone-link');
-  phone.textContent = SITE.phoneDisplay;
-  phone.href = telHref();
+    <article>
+      <span>🌈</span>
+      <h3>Gay-friendly</h3>
+      <p>Un accueil bienveillant, sans jugement.</p>
+    </article>
 
-  $('#call-link').href = telHref();
-  $('#whatsapp-link').href = whatsappHref();
-  $('#cta-whatsapp').href = whatsappHref();
-  $('#telegram-link').href = telegramHref();
+    <article>
+      <span>✨</span>
+      <h3>Expérience</h3>
+      <p id="experience-card">Plus de 15 ans de pratique et d’expérience.</p>
+    </article>
+  </section>
 
-  const fw = $('#framework-list');
-  fw.innerHTML = '';
-  SITE.framework.forEach((x) => {
-    const li = document.createElement('li');
-    li.textContent = x;
-    fw.appendChild(li);
-  });
+  <section class="section split" id="apropos">
+    <div>
+      <p class="eyebrow">À propos</p>
+      <h2 id="about-title">Une approche simple et respectueuse.</h2>
+      <p id="about-text">
+        Depuis plus de quinze ans, je pratique le massage bien-être dans une approche humaine,
+        attentive et sans jugement.
+      </p>
+    </div>
 
-  const services = $('#services');
-  services.innerHTML = '';
-  SITE.services.forEach((s) => {
-    const a = document.createElement('article');
-    a.innerHTML = `<span class="tag"></span><h3></h3><p></p>`;
-    a.querySelector('.tag').textContent = s.tag;
-    a.querySelector('h3').textContent = s.title;
-    a.querySelector('p').textContent = s.text;
-    services.appendChild(a);
-  });
-}
+    <div class="soft-card">
+      <h3>Cadre</h3>
+      <ul id="framework-list"></ul>
+    </div>
+  </section>
 
-function renderReviews(items = []) {
-  const list = $('#reviews-list');
-  const summaryStars = document.querySelector('.rating-line .stars');
+  <section class="section" id="approche">
+    <p class="eyebrow">Approche</p>
+    <h2>Ce que je privilégie</h2>
+    <div class="cards" id="services"></div>
+  </section>
 
-  list.innerHTML = '';
+  <section class="section reviews-contact" id="avis">
+    <div>
+      <p class="eyebrow">Retours</p>
+      <h2>Retours d’expérience</h2>
 
-  if (!items.length) {
-    list.innerHTML = '<p class="empty-reviews">Aucun retour affiché pour le moment.</p>';
-    setText('#review-summary', 'Aucun avis affiché pour le moment.');
+      <div class="rating-line">
+        <span class="stars">☆☆☆☆☆</span>
+        <span id="review-summary">Aucun avis affiché pour le moment.</span>
+      </div>
 
-    if (summaryStars) {
-      summaryStars.textContent = '☆☆☆☆☆';
-    }
+      <div class="reviews" id="reviews-list"></div>
 
-    return;
-  }
+      <form class="review-form" id="review-form">
+        <h3>Laisser un retour</h3>
 
-  items.slice(0, 6).forEach((r) => {
-    const a = document.createElement('article');
-    a.innerHTML = '<blockquote></blockquote><cite></cite><div class="stars"></div>';
-    a.querySelector('blockquote').textContent = '“' + (r.message || '') + '”';
-    a.querySelector('cite').textContent = '— ' + (r.name || 'Anonyme');
-    a.querySelector('.stars').textContent = stars(r.rating);
-    list.appendChild(a);
-  });
+        <input id="review-name" maxlength="40" placeholder="Votre prénom" autocomplete="name">
 
-  const avg =
-    items.reduce((sum, r) => sum + (Number(r.rating) || 5), 0) / items.length;
+        <div class="rating-picker" aria-label="Note">
+          <input type="hidden" id="review-rating" value="5">
+          <button type="button" data-rating="1" aria-label="1 étoile">★</button>
+          <button type="button" data-rating="2" aria-label="2 étoiles">★</button>
+          <button type="button" data-rating="3" aria-label="3 étoiles">★</button>
+          <button type="button" data-rating="4" aria-label="4 étoiles">★</button>
+          <button type="button" data-rating="5" aria-label="5 étoiles">★</button>
+        </div>
 
-  if (summaryStars) {
-    summaryStars.textContent = stars(Math.round(avg));
-  }
+        <textarea id="review-message" maxlength="700" placeholder="Votre message"></textarea>
 
-  setText(
-    '#review-summary',
-    `${avg.toFixed(1)}/5 — ${items.length} avis affiché${items.length > 1 ? 's' : ''}.`
-  );
-}
+        <button class="btn primary" type="submit">Publier</button>
+        <p class="form-status" id="review-status"></p>
+      </form>
+    </div>
 
-async function loadReviews() {
-  if (!SITE.googleAppsScriptUrl) {
-    renderReviews(SITE.fallbackReviews || []);
-    return;
-  }
+    <aside class="contact-card" id="contact">
+      <h2>Me contacter</h2>
+      <p id="contact-name">Vincent</p>
 
-  try {
-    const res = await fetch(SITE.googleAppsScriptUrl + '?action=list&page=1&pageSize=6');
-    const data = await res.json();
+      <p class="contact-meta">📍 <span id="contact-location">Vienne (38200)</span></p>
+      <p class="contact-meta">🌈 Accueil gay-friendly</p>
 
-    if (!data.ok) throw new Error();
+      <a class="phone" id="phone-link" href="#">06 38 20 23 99</a>
 
-    const reviews = data.reviews || data.items || [];
-    renderReviews(reviews.length ? reviews : []);
-  } catch {
-    renderReviews(SITE.fallbackReviews || []);
-  }
-}
+      <div class="contact-buttons">
+        <a class="btn primary" id="whatsapp-link" href="#">WhatsApp</a>
+        <a class="btn telegram" id="telegram-link" href="#">Telegram</a>
+        <a class="btn ghost" id="call-link" href="#">Appeler</a>
+      </div>
 
-function setupRatingPicker() {
-  const buttons = document.querySelectorAll('.rating-picker button');
-  const input = $('#review-rating');
+      <p class="small" id="contact-note">Prise de contact uniquement sur rendez-vous.</p>
+    </aside>
+  </section>
+</main>
 
-  if (!buttons.length || !input) return;
+<footer>
+  <span id="footer-name">Massage+</span> —
+  <span id="year"></span> · Page personnelle
+</footer>
 
-  function refresh() {
-    buttons.forEach((btn) => {
-      const value = Number(btn.dataset.rating);
-      btn.classList.toggle('active', value <= selectedRating);
-      btn.setAttribute('aria-pressed', value <= selectedRating ? 'true' : 'false');
-    });
-
-    input.value = selectedRating;
-  }
-
-  buttons.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      selectedRating = Number(btn.dataset.rating) || 5;
-      refresh();
-    });
-  });
-
-  refresh();
-}
-
-async function submitReview(e) {
-  e.preventDefault();
-
-  const status = $('#review-status');
-  const name = $('#review-name').value.trim();
-  const message = $('#review-message').value.trim();
-  const rating = Number($('#review-rating')?.value || selectedRating || 5);
-
-  if (!message) {
-    status.textContent = 'Écris au moins un petit message.';
-    return;
-  }
-
-  if (!SITE.googleAppsScriptUrl) {
-    status.textContent = 'Aucune connexion aux avis n’est configurée pour le moment.';
-    return;
-  }
-
-  status.textContent = 'Publication…';
-
-  try {
-    const res = await fetch(SITE.googleAppsScriptUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify({
-        action: 'add',
-        name,
-        message,
-        rating
-      })
-    });
-
-    const data = await res.json();
-
-    if (!data.ok) throw new Error(data.error || 'Erreur');
-
-    $('#review-name').value = '';
-    $('#review-message').value = '';
-    selectedRating = 5;
-    setupRatingPicker();
-
-    status.textContent = data.message || 'Merci, votre avis sera affiché après validation.';
-
-    await loadReviews();
-  } catch {
-    status.textContent = 'Impossible de publier pour le moment.';
-  }
-}
-
-fillSite();
-setupRatingPicker();
-loadReviews();
-
-$('#review-form').addEventListener('submit', submitReview);
-$('#menu-button').addEventListener('click', () => $('#nav').classList.toggle('open'));
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
