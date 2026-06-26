@@ -77,11 +77,18 @@ function fillSite() {
 
 function renderReviews(items = []) {
   const list = $('#reviews-list');
+  const summaryStars = document.querySelector('.rating-line .stars');
+
   list.innerHTML = '';
 
   if (!items.length) {
     list.innerHTML = '<p class="empty-reviews">Aucun retour affiché pour le moment.</p>';
     setText('#review-summary', 'Aucun avis affiché pour le moment.');
+
+    if (summaryStars) {
+      summaryStars.textContent = '☆☆☆☆☆';
+    }
+
     return;
   }
 
@@ -96,6 +103,10 @@ function renderReviews(items = []) {
 
   const avg =
     items.reduce((sum, r) => sum + (Number(r.rating) || 5), 0) / items.length;
+
+  if (summaryStars) {
+    summaryStars.textContent = stars(Math.round(avg));
+  }
 
   setText(
     '#review-summary',
@@ -162,7 +173,7 @@ async function submitReview(e) {
   }
 
   if (!SITE.googleAppsScriptUrl) {
-    status.textContent = 'https://script.google.com/macros/s/AKfycbwTcxMU8xMhEsTEO4xldqo7BXekPd4aPqsOaGRto6VidQ9aIyKOffaNmhcUtPcgpXBA/exec';
+    status.textContent = 'Aucune connexion aux avis n’est configurée pour le moment.';
     return;
   }
 
