@@ -24,5 +24,5 @@ export const SITE = {
     {name:'Thomas', message:'Atmosphère apaisante, toucher précis et bienveillant. Je recommande.'},
     {name:'Alain', message:'Une expérience unique, beaucoup de sensations et un grand respect.'}
   ],
-  googleAppsScriptUrl: 'https://script.google.com/macros/s/AKfycbwpWc2GitncEWAlKkigpg6NX_-xZIGeBu_1PIJgD4wMgdcj0V4g5IOGFbZCFHPqPAPh/exec'
+  googleAppsScriptUrl: 'https://script.google.com/macros/s/AKfycbwTcxMU8xMhEsTEO4xldqo7BXekPd4aPqsOaGRto6VidQ9aIyKOffaNmhcUtPcgpXBA/exec'
 };
