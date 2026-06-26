@@ -1,120 +1,40 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Massages bien-être sur rendez-vous à Vienne (38200). Détente, relaxation et écoute." />
-  <title>Massage+ — Bien-être à Vienne</title>
-  <link rel="icon" href="assets/favicon.png" />
-  <link rel="stylesheet" href="css/styles.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Massage+ : massages bien-être sur rendez-vous à Vienne (38200).">
+  <title>Massage+ — Bien-être & Équilibre</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <header class="site-header">
-    <a class="brand" href="#accueil" aria-label="Accueil Massage+">
-      <span class="brand-mark">✦</span>
-      <span><strong>Massage+</strong><small>Bien-être & équilibre</small></span>
-    </a>
-    <nav class="nav" aria-label="Navigation principale">
-      <a href="#apropos">À propos</a>
-      <a href="#massages">Massages</a>
-      <a href="#avis">Avis</a>
-      <a href="#contact">Contact</a>
-    </nav>
-    <div class="quick-links" aria-label="Réseaux et contact rapide">
-      <a id="top-whatsapp" href="#" aria-label="WhatsApp">☘</a>
-      <a id="top-telegram" href="#" aria-label="Telegram">➤</a>
-      <a href="#contact" aria-label="Contact">☎</a>
+<header class="topbar">
+  <a class="brand" href="#accueil"><img src="assets/favicon.svg" alt=""><span><strong id="brand-name">Massage+</strong><small id="brand-subtitle">Bien-être & Équilibre</small></span></a>
+  <button class="menu-button" id="menu-button" aria-label="Ouvrir le menu">☰</button>
+  <nav id="nav"><a href="#accueil">Accueil</a><a href="#apropos">À propos</a><a href="#massages">Massages</a><a href="#avis">Avis</a><a href="#contact">Contact</a></nav>
+</header>
+<main>
+  <section class="hero" id="accueil">
+    <div class="hero-text">
+      <p class="eyebrow" id="hero-kicker">Massages bien-être sur rendez-vous</p>
+      <h1 id="hero-title">Un moment pour vous.</h1>
+      <p id="hero-text">Une approche douce, naturelle et personnalisée pour retrouver détente, présence et équilibre.</p>
+      <div class="cta-row"><a class="btn primary" id="cta-whatsapp" href="#">Prendre rendez-vous</a><a class="btn ghost" href="#apropos">En savoir plus</a></div>
     </div>
-  </header>
-
-  <main id="accueil">
-    <section class="hero">
-      <div class="hero-copy">
-        <p class="eyebrow">Massages bien-être sur rendez-vous à Vienne (38200)</p>
-        <h1>Un moment pour vous.</h1>
-        <p class="lead">Une approche calme, respectueuse et personnalisée pour relâcher les tensions, respirer mieux et retrouver une sensation d’équilibre.</p>
-        <div class="cta-row">
-          <a class="button primary" href="#contact">Prendre rendez-vous</a>
-          <a class="button secondary" href="#massages">Découvrir l’approche</a>
-        </div>
-      </div>
-      <div class="hero-visual" role="img" aria-label="Ambiance zen avec pierres, feuille et bougie"></div>
-    </section>
-
-    <section class="features" aria-label="Informations essentielles">
-      <article class="feature"><span>🌿</span><h2>Approche naturelle</h2><p>Techniques douces, intuitives et adaptées à vos besoins du moment.</p></article>
-      <article class="feature"><span>🕯️</span><h2>Écoute & présence</h2><p>Chaque séance garde un cadre clair, calme et respectueux.</p></article>
-      <article class="feature"><span>📍</span><h2>Localisation</h2><p>Vienne (38200). Séances sur rendez-vous.</p></article>
-      <article class="feature"><span>✨</span><h2>Expérience</h2><p>Plus de 10 ans de pratique personnelle du bien-être et du toucher.</p></article>
-    </section>
-
-    <section class="split" id="apropos">
-      <div>
-        <p class="section-kicker">À propos</p>
-        <h2>Un cadre simple, humain et apaisant.</h2>
-        <p>Je propose des massages bien-être orientés détente, relaxation et relâchement corporel. L’objectif n’est pas médical : il s’agit d’un temps de pause, d’écoute et de mieux-être.</p>
-        <p>Le rythme, la pression et l’approche sont adaptés avant chaque séance, selon vos besoins et vos limites.</p>
-      </div>
-      <aside class="soft-card">
-        <strong>Important</strong>
-        <p>Les massages proposés ne remplacent pas un avis médical, un suivi kinésithérapeutique ou thérapeutique.</p>
-      </aside>
-    </section>
-
-    <section class="massages" id="massages">
-      <p class="section-kicker">Massages</p>
-      <h2>Des séances adaptées à votre besoin.</h2>
-      <div class="massage-grid">
-        <article><h3>Relaxation</h3><p>Un massage doux pour calmer le système nerveux et favoriser le lâcher-prise.</p></article>
-        <article><h3>Californien</h3><p>Gestes enveloppants, fluides et progressifs pour une détente globale.</p></article>
-        <article><h3>Deep Tissue doux</h3><p>Travail plus ciblé sur certaines tensions, toujours dans le respect du confort.</p></article>
-      </div>
-    </section>
-
-    <section class="reviews" id="avis">
-      <div class="reviews-head">
-        <div><p class="section-kicker">Avis clients</p><h2>Retours d’expérience</h2></div>
-        <div class="rating"><span id="reviews-stars">★★★★★</span><strong id="reviews-summary">Avis récents</strong></div>
-      </div>
-      <div class="review-list" id="reviews-list">
-        <article class="review"><p>“Un vrai moment de lâcher-prise, très respectueux et apaisant.”</p><span>— Claire</span></article>
-        <article class="review"><p>“Atmosphère calme, toucher précis et beaucoup d’écoute.”</p><span>— Thomas</span></article>
-        <article class="review"><p>“Une expérience douce, posée, avec un grand respect du rythme.”</p><span>— Julie</span></article>
-      </div>
-
-      <details class="review-form-wrap">
-        <summary>Laisser un avis</summary>
-        <form id="review-form" class="review-form">
-          <input id="review-name" name="name" maxlength="40" placeholder="Votre prénom" autocomplete="name" />
-          <select id="review-rating" name="rating" aria-label="Note">
-            <option value="5">★★★★★ — 5</option>
-            <option value="4">★★★★☆ — 4</option>
-            <option value="3">★★★☆☆ — 3</option>
-          </select>
-          <textarea id="review-message" name="message" maxlength="800" placeholder="Votre avis"></textarea>
-          <button class="button primary" type="submit">Envoyer</button>
-          <p id="review-status" class="form-status" role="status"></p>
-        </form>
-      </details>
-    </section>
-
-    <section class="contact" id="contact">
-      <div class="contact-card">
-        <p class="section-kicker">Contact</p>
-        <h2>Me contacter</h2>
-        <p class="phone-line"><span>☎</span><a id="phone-link" href="#">06 12 34 56 78</a></p>
-        <div class="contact-buttons">
-          <a class="button whatsapp" id="whatsapp-link" href="#">WhatsApp</a>
-          <a class="button telegram" id="telegram-link" href="#">Telegram</a>
-          <a class="button secondary" id="call-link" href="#">Appeler</a>
-        </div>
-        <p class="small-note">Réponse selon disponibilités. Rendez-vous uniquement après échange préalable.</p>
-      </div>
-      <div class="contact-image" aria-hidden="true"></div>
-    </section>
-  </main>
-
-  <footer>© <span id="year"></span> Massage+ — Tous droits réservés.</footer>
-  <script type="module" src="js/main.js"></script>
+    <div class="hero-image" role="img" aria-label="Ambiance zen avec galets et bougie"></div>
+  </section>
+  <section class="features" aria-label="Informations rapides">
+    <article><span>🌿</span><h3>Approche naturelle</h3><p>Techniques adaptées à vos besoins, dans le respect de votre rythme.</p></article>
+    <article><span>👐</span><h3>Écoute & présence</h3><p>Chaque séance est pensée comme un espace calme et bienveillant.</p></article>
+    <article><span>📍</span><h3>Localisation</h3><p id="location-card">Vienne (38200)</p></article>
+    <article><span>✨</span><h3>Expérience</h3><p id="experience-card">Plus de 10 ans d'expérience.</p></article>
+  </section>
+  <section class="section split" id="apropos"><div><p class="eyebrow">À propos</p><h2 id="about-title">Une séance simple, claire et respectueuse.</h2><p id="about-text">Je propose des massages bien-être sur rendez-vous, avec une attention portée à la détente, au confort et à la qualité de présence.</p></div><div class="soft-card"><h3>Cadre</h3><ul id="framework-list"></ul></div></section>
+  <section class="section" id="massages"><p class="eyebrow">Massages</p><h2>Prestations proposées</h2><div class="cards" id="services"></div></section>
+  <section class="section reviews-contact" id="avis"><div><p class="eyebrow">Avis clients</p><h2>Retours d’expérience</h2><div class="rating-line"><span class="stars">★★★★★</span><span id="review-summary">Avis affichés depuis Google Sheets ou exemples locaux.</span></div><div class="reviews" id="reviews-list"></div><form class="review-form" id="review-form"><h3>Laisser un avis</h3><input id="review-name" maxlength="40" placeholder="Votre prénom" autocomplete="name"><textarea id="review-message" maxlength="700" placeholder="Votre message"></textarea><button class="btn primary" type="submit">Publier</button><p class="form-status" id="review-status"></p></form></div><aside class="contact-card" id="contact"><h2>Me contacter</h2><p id="contact-name">Massage+</p><a class="phone" id="phone-link" href="#">06 12 34 56 78</a><div class="contact-buttons"><a class="btn primary" id="whatsapp-link" href="#">WhatsApp</a><a class="btn telegram" id="telegram-link" href="#">Telegram</a><a class="btn ghost" id="call-link" href="#">Appeler</a></div><p class="small" id="contact-note">Réponse rapide — sur rendez-vous.</p></aside></section>
+</main>
+<footer><span id="footer-name">Massage+</span> — <span id="year"></span> · Tous droits réservés.</footer>
+<script type="module" src="js/main.js"></script>
 </body>
 </html>
