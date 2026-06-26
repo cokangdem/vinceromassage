@@ -1,12 +1,12 @@
 export const SITE = {
   brandName: 'Massage+',
   brandSubtitle: 'Bien-être & Équilibre',
-  practitionerName: 'Prénom Nom',
-  phoneDisplay: '06 12 34 56 78',
+  practitionerName: 'Vincent',
+  phoneDisplay: '06 38 20 23 99',
   phoneInternational: '33612345678',
-  telegramUsername: 'votrePseudoTelegram',
+  telegramUsername: '@vincero_massage',
   location: 'Vienne (38200)',
-  experience: 'Plus de 10 ans d’expérience.',
+  experience: 'Plus de 15 ans d’expérience.',
   heroKicker: 'Massages bien-être sur rendez-vous',
   heroTitle: 'Un moment pour vous.',
   heroText: 'Massages bien-être sur rendez-vous à Vienne (38200). Une approche naturelle et personnalisée pour retrouver équilibre, détente et vitalité.',
@@ -20,9 +20,9 @@ export const SITE = {
     {tag:'Corps', title:'Massage profond doux', text:'Un travail plus appuyé mais progressif, toujours dans le respect de vos limites.'}
   ],
   fallbackReviews: [
-    {name:'Claire', message:'Un vrai moment de lâcher-prise, avec beaucoup d’écoute et de respect.'},
+    {name:'Jim', message:'Un vrai moment de lâcher-prise, avec beaucoup d’écoute et de respect.'},
     {name:'Thomas', message:'Atmosphère apaisante, toucher précis et bienveillant. Je recommande.'},
-    {name:'Julie', message:'Une expérience unique, beaucoup de sensations et un grand respect.'}
+    {name:'Alain', message:'Une expérience unique, beaucoup de sensations et un grand respect.'}
   ],
-  googleAppsScriptUrl: ''
+  googleAppsScriptUrl: 'https://script.google.com/macros/s/AKfycbwpWc2GitncEWAlKkigpg6NX_-xZIGeBu_1PIJgD4wMgdcj0V4g5IOGFbZCFHPqPAPh/exec'
 };
