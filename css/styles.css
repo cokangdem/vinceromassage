@@ -52,3 +52,9 @@ main{height:calc(100dvh - 190px)}
  footer{min-height:44px;font-size:10px;gap:0 12px}
  .info-dialog{padding:30px 22px 22px}
 }
+
+/* Une même lecture pour la présentation et le parcours. */
+.presentation .intro,.presentation .journey{width:100%;max-width:44ch;font-size:14px;line-height:1.7;color:var(--text);text-align:left}
+.presentation .intro{margin:18px 0 12px}
+.presentation .journey{margin:0 0 18px}
+@media(max-width:720px){.presentation .intro,.presentation .journey{font-size:14px;line-height:1.65}.presentation .journey{margin-bottom:16px}}
