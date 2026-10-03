@@ -7,13 +7,14 @@
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-<header><a class="brand" href="#presentation"><img src="assets/favicon.svg" alt="">Vincent</a><nav aria-label="Navigation"><button type="button" data-panel="presentation" aria-current="true">Présentation</button><button type="button" data-panel="avis">Témoignages</button></nav></header>
+<div class="site-shell">
+<header><a class="brand" href="#presentation"><img src="assets/logo-vincero.webp" alt="">Vincent</a><nav aria-label="Navigation"><button type="button" data-panel="presentation" aria-current="true">Présentation</button><button type="button" data-panel="avis">Témoignages</button></nav></header>
 <main id="panels">
 <section class="presentation panel" id="presentation" aria-labelledby="title">
 <p class="eyebrow">Un moment à soi</p><h1 id="title">Détente &<br><em>exploration.</em></h1>
 <p class="intro">J’aime masser et partager des moments de détente et d’exploration sensorielle, avec douceur et attention.</p>
 <p class="location">Vienne · Isère <span>Accueil gay-friendly 🌈</span></p>
-<img class="zen" src="assets/divider-zen.png" alt="" aria-hidden="true">
+<img class="mood-image" src="assets/hero-massage.webp" alt="Ambiance chaleureuse autour du massage" width="700" height="467">
 <details class="contact"><summary class="btn primary">Me contacter</summary><div class="contact-content"><a class="phone" id="phone-link" href="#"></a><div class="contact-buttons"><a id="whatsapp-link" href="#">WhatsApp ↗</a><a id="telegram-link" href="#">Telegram ↗</a><a id="call-link" href="#">Appeler ↗</a></div></div></details>
 <button class="mobile-next" type="button" data-panel="avis">Lire les témoignages →</button>
 </section>
@@ -22,6 +23,7 @@
 <div class="reviews" id="reviews-list" aria-live="polite"></div><p class="small">Les témoignages sont affichés du plus récent au plus ancien.</p></section>
 </main>
 <footer>Vincent · <span id="year"></span></footer>
+</div>
 <dialog id="review-dialog"><button type="button" id="close-review" class="close" aria-label="Fermer">×</button><form id="review-form" class="review-form"><p class="eyebrow">Votre expérience</p><h2>Laisser un avis</h2><label for="review-name">Prénom ou pseudo (facultatif)</label><input id="review-name" maxlength="40" autocomplete="nickname"><div class="rating-picker" role="group" aria-label="Votre note"><input type="hidden" id="review-rating" value="5"><button type="button" data-rating="1" aria-label="1 étoile">★</button><button type="button" data-rating="2" aria-label="2 étoiles">★</button><button type="button" data-rating="3" aria-label="3 étoiles">★</button><button type="button" data-rating="4" aria-label="4 étoiles">★</button><button type="button" data-rating="5" aria-label="5 étoiles">★</button></div><label for="review-message">Votre témoignage</label><textarea id="review-message" maxlength="700" required rows="4"></textarea><label for="review-private-message">Message privé pour Vincent (facultatif)</label><textarea id="review-private-message" maxlength="1000" rows="3" placeholder="Ce message ne sera pas publié."></textarea><p class="small">Votre pseudo et votre témoignage seront publics. Le message privé est visible uniquement par Vincent. Évitez les informations personnelles. L’envoi utilise Google et le stockage des avis existant.</p><label class="consent"><input type="checkbox" required> J’accepte la publication de mon témoignage.</label><button class="btn primary" type="submit">Envoyer mon avis</button><p id="review-status" role="status"></p></form></dialog>
 <div id="review-toast" class="toast" role="status" aria-live="polite" aria-atomic="true" hidden><span>✓ Avis envoyé — publié après validation.</span><button type="button" id="dismiss-toast" aria-label="Fermer la confirmation">×</button></div>
 <script type="module" src="js/main.js"></script>
