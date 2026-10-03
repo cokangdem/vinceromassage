@@ -173,7 +173,9 @@ async function submitReview(e) {
     selectedRating = 5;
     refreshRating();
 
-    status.textContent = data.message || 'Merci pour votre témoignage.';
+    status.textContent = '';
+    $('#review-dialog').close();
+    showReviewConfirmation();
 
     await loadReviews();
   } catch {
@@ -208,3 +210,15 @@ panels.addEventListener('scroll', () => {
     else button.removeAttribute('aria-current');
   });
 }, {passive: true});
+
+let confirmationTimer;
+function showReviewConfirmation() {
+  const toast = $('#review-toast');
+  clearTimeout(confirmationTimer);
+  toast.hidden = false;
+  confirmationTimer = setTimeout(() => { toast.hidden = true; }, 10000);
+}
+$('#dismiss-toast').addEventListener('click', () => {
+  clearTimeout(confirmationTimer);
+  $('#review-toast').hidden = true;
+});
