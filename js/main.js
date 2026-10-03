@@ -47,17 +47,17 @@ function renderReviews(items = []) {
   list.innerHTML = '';
 
   if (!items.length) {
-    list.innerHTML = '<p class="empty-reviews">Aucun retour affiché pour le moment.</p>';
+    list.innerHTML = '<p class="empty-reviews">Vos mots trouveront leur place ici.</p>';
     setText('#review-summary', 'Aucun avis affiché pour le moment.');
 
     if (summaryStars) {
-      summaryStars.textContent = '☆☆☆☆☆';
+      summaryStars.textContent = '';
     }
 
     return;
   }
 
-  items.slice(0, 6).forEach((r) => {
+  items.forEach((r) => {
     const a = document.createElement('article');
     a.innerHTML = '<blockquote></blockquote><cite></cite><div class="stars"></div>';
     a.querySelector('blockquote').textContent = '“' + (r.message || '') + '”';
@@ -221,4 +221,31 @@ function showReviewConfirmation() {
 $('#dismiss-toast').addEventListener('click', () => {
   clearTimeout(confirmationTimer);
   $('#review-toast').hidden = true;
+});
+
+const returnDialogs = new WeakMap();
+document.querySelectorAll('[data-dialog]').forEach(button => {
+  button.addEventListener('click', () => {
+    const target = document.getElementById(button.dataset.dialog);
+    const current = button.closest('dialog');
+    if (current?.open) {
+      current.close();
+      returnDialogs.set(target, current);
+    }
+    target.showModal();
+  });
+});
+document.querySelectorAll('dialog').forEach(modal => {
+  modal.querySelector('[data-close-dialog]')?.addEventListener('click', () => modal.close());
+  modal.addEventListener('click', event => {
+    if (event.target !== modal) return;
+    const bounds = modal.getBoundingClientRect();
+    if (event.clientX < bounds.left || event.clientX > bounds.right ||
+        event.clientY < bounds.top || event.clientY > bounds.bottom) modal.close();
+  });
+  modal.addEventListener('close', () => {
+    const previous = returnDialogs.get(modal);
+    returnDialogs.delete(modal);
+    if (previous && !previous.open) previous.showModal();
+  });
 });

@@ -23,3 +23,32 @@ footer{height:44px;border-top:1px solid var(--line);background:rgba(255,251,244,
 @media(max-width:1000px) and (min-width:721px){.site-shell{width:calc(100% - 36px)}main{gap:24px;padding:20px 24px}.presentation{padding:0}.testimonials{padding-left:24px}.reviews-heading{flex-wrap:wrap}.reviews-heading h2{font-size:28px}}
 @media(max-width:720px){.site-shell{width:calc(100% - 24px);margin:12px auto;border-radius:22px}header{height:72px;padding:0 16px}.brand{font-size:24px}.brand img{width:34px;height:34px}nav{gap:2px}nav button{padding:9px 7px;font-size:11px}main{height:calc(100dvh - 134px);min-height:0;padding:0;gap:0}.presentation{padding:26px;justify-content:flex-start}.testimonials{padding:26px}h1{font-size:clamp(44px,12vw,64px)}.intro{font-size:14px}.mood-image{height:clamp(90px,17dvh,150px);margin:16px 0}.mobile-next{margin-top:14px}.reviews-heading{gap:10px}.reviews-heading h2{font-size:29px}footer{height:36px}.rating-line{margin:20px 0}}
 @media(max-width:360px){header{padding:0 12px}.brand{font-size:21px}.brand img{width:28px;height:28px}nav button{font-size:10px;padding:9px 5px}.presentation,.testimonials{padding:22px}}
+
+/* Présentation personnelle et fenêtres compactes. */
+.journey{font-size:13px;line-height:1.6;color:var(--muted);max-width:420px;margin:0 0 14px}
+.presentation{overflow-y:auto;justify-content:flex-start;padding-top:12px}
+.presentation> *{flex-shrink:0}
+h1{font-size:clamp(42px,4.5vw,62px)}
+.intro{margin:16px 0 10px}
+.mood-image{height:clamp(80px,13dvh,125px);margin:14px 0}
+.info-dialog{width:min(480px,calc(100% - 24px));padding:32px 26px 24px}
+.info-dialog h2{font-size:28px;margin:0 24px 18px 0}
+.info-dialog p{font-size:13px;line-height:1.65;margin:12px 0}
+.contact-content{margin-top:20px}
+.contact-buttons{flex-wrap:wrap;margin-top:14px;font-size:14px}
+.close{width:44px;height:44px;right:8px;top:5px;color:var(--text)}
+footer{height:auto;min-height:44px;display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:6px 18px;padding:8px 14px}
+.footer-links{display:flex;align-items:center;gap:8px}
+.footer-links button,.text-link{border:0;background:none;color:var(--green);padding:0;text-decoration:underline;text-underline-offset:3px;font:inherit}
+.footer-links button{padding:4px 0}
+.small{font-size:12px}
+main{height:calc(100dvh - 190px)}
+@media(max-width:720px){
+ main{height:calc(100dvh - 148px)}
+ .presentation{padding:24px;overflow-y:auto}
+ h1{font-size:clamp(42px,11vw,60px)}
+ .journey{font-size:13px;margin-bottom:12px}
+ .mood-image{height:clamp(85px,15dvh,130px)}
+ footer{min-height:44px;font-size:10px;gap:0 12px}
+ .info-dialog{padding:30px 22px 22px}
+}
