@@ -132,6 +132,7 @@ async function submitReview(e) {
   const status = $('#review-status');
   const name = $('#review-name').value.trim();
   const message = $('#review-message').value.trim();
+  const privateMessage = $('#review-private-message').value.trim();
   const rating = Number($('#review-rating')?.value || selectedRating || 5);
 
   if (!message) {
@@ -157,6 +158,7 @@ async function submitReview(e) {
         action: 'add',
         name,
         message,
+        privateMessage,
         rating
       })
     });
@@ -167,6 +169,7 @@ async function submitReview(e) {
 
     $('#review-name').value = '';
     $('#review-message').value = '';
+    $('#review-private-message').value = '';
     selectedRating = 5;
     refreshRating();
 
