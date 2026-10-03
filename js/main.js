@@ -18,7 +18,7 @@ function whatsappHref() {
     'https://wa.me/' +
     SITE.phoneInternational.replace(/\D/g, '') +
     '?text=' +
-    encodeURIComponent('Bonjour, je vous contacte pour prendre rendez-vous pour un massage.')
+    encodeURIComponent('Bonjour Vincent,')
   );
 }
 
@@ -32,47 +32,12 @@ function stars(rating = 5) {
 }
 
 function fillSite() {
-  setText('#brand-name', SITE.brandName);
-  setText('#brand-subtitle', SITE.brandSubtitle);
-  setText('#footer-name', SITE.brandName);
-  setText('#hero-kicker', SITE.heroKicker);
-  setText('#hero-title', SITE.heroTitle);
-  setText('#hero-text', SITE.heroText);
-  setText('#about-title', SITE.aboutTitle);
-  setText('#about-text', SITE.aboutText);
-  setText('#location-card', SITE.location);
-  setText('#experience-card', SITE.experience);
-  setText('#contact-name', SITE.practitionerName || SITE.brandName);
-  setText('#contact-note', SITE.contactNote);
   setText('#year', new Date().getFullYear());
-
-  const phone = $('#phone-link');
-  phone.textContent = SITE.phoneDisplay;
-  phone.href = telHref();
-
+  $('#phone-link').textContent = SITE.phoneDisplay;
+  $('#phone-link').href = telHref();
   $('#call-link').href = telHref();
   $('#whatsapp-link').href = whatsappHref();
-  $('#cta-whatsapp').href = whatsappHref();
   $('#telegram-link').href = telegramHref();
-
-  const fw = $('#framework-list');
-  fw.innerHTML = '';
-  SITE.framework.forEach((x) => {
-    const li = document.createElement('li');
-    li.textContent = x;
-    fw.appendChild(li);
-  });
-
-  const services = $('#services');
-  services.innerHTML = '';
-  SITE.services.forEach((s) => {
-    const a = document.createElement('article');
-    a.innerHTML = `<span class="tag"></span><h3></h3><p></p>`;
-    a.querySelector('.tag').textContent = s.tag;
-    a.querySelector('h3').textContent = s.title;
-    a.querySelector('p').textContent = s.text;
-    services.appendChild(a);
-  });
 }
 
 function renderReviews(items = []) {
@@ -97,20 +62,20 @@ function renderReviews(items = []) {
     a.innerHTML = '<blockquote></blockquote><cite></cite><div class="stars"></div>';
     a.querySelector('blockquote').textContent = '“' + (r.message || '') + '”';
     a.querySelector('cite').textContent = '— ' + (r.name || 'Anonyme');
-    a.querySelector('.stars').textContent = stars(r.rating);
+    a.querySelector('.stars').textContent = r.rating ? stars(r.rating) : '';
     list.appendChild(a);
   });
 
-  const avg =
-    items.reduce((sum, r) => sum + (Number(r.rating) || 5), 0) / items.length;
+  const rated = items.filter(r => Number(r.rating) >= 1 && Number(r.rating) <= 5);
+  const avg = rated.length ? rated.reduce((sum, r) => sum + Number(r.rating), 0) / rated.length : 0;
 
   if (summaryStars) {
-    summaryStars.textContent = stars(Math.round(avg));
+    summaryStars.textContent = avg ? stars(Math.round(avg)) : '';
   }
 
   setText(
     '#review-summary',
-    `${avg.toFixed(1)}/5 — ${items.length} avis affiché${items.length > 1 ? 's' : ''}.`
+    `${avg ? avg.toFixed(1) + '/5 — ' : ''}${items.length} témoignage${items.length > 1 ? 's' : ''}`
   );
 }
 
@@ -133,6 +98,7 @@ async function loadReviews() {
   }
 }
 
+let refreshRating = () => {};
 function setupRatingPicker() {
   const buttons = document.querySelectorAll('.rating-picker button');
   const input = $('#review-rating');
@@ -156,6 +122,7 @@ function setupRatingPicker() {
     });
   });
 
+  refreshRating = refresh;
   refresh();
 }
 
@@ -177,7 +144,10 @@ async function submitReview(e) {
     return;
   }
 
-  status.textContent = 'Publication…';
+  const submit = $('#review-form button[type=submit]');
+  if (submit.disabled) return;
+  submit.disabled = true;
+  status.textContent = 'Envoi…';
 
   try {
     const res = await fetch(SITE.googleAppsScriptUrl, {
@@ -198,13 +168,15 @@ async function submitReview(e) {
     $('#review-name').value = '';
     $('#review-message').value = '';
     selectedRating = 5;
-    setupRatingPicker();
+    refreshRating();
 
-    status.textContent = data.message || 'Merci, votre avis sera affiché après validation.';
+    status.textContent = data.message || 'Merci pour votre témoignage.';
 
     await loadReviews();
   } catch {
-    status.textContent = 'Impossible de publier pour le moment.';
+    status.textContent = 'Impossible de publier pour le moment. Réessayez dans quelques instants.';
+  } finally {
+    submit.disabled = false;
   }
 }
 
@@ -213,4 +185,23 @@ setupRatingPicker();
 loadReviews();
 
 $('#review-form').addEventListener('submit', submitReview);
-$('#menu-button').addEventListener('click', () => $('#nav').classList.toggle('open'));
+const dialog = $('#review-dialog');
+$('#open-review').addEventListener('click', () => dialog.showModal());
+$('#close-review').addEventListener('click', () => dialog.close());
+const panels = $('#panels');
+const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+document.querySelectorAll('[data-panel]').forEach(button => {
+  button.addEventListener('click', () => {
+    const target = document.getElementById(button.dataset.panel);
+    if (window.matchMedia('(max-width: 720px)').matches) {
+      panels.scrollTo({left: target.offsetLeft - panels.offsetLeft, behavior: reduced.matches ? 'instant' : 'smooth'});
+    } else { target.scrollIntoView({block: 'nearest', behavior: reduced.matches ? 'instant' : 'smooth'}); }
+  });
+});
+panels.addEventListener('scroll', () => {
+  const current = panels.scrollLeft > panels.clientWidth / 2 ? 'avis' : 'presentation';
+  document.querySelectorAll('nav [data-panel]').forEach(button => {
+    if (button.dataset.panel === current) button.setAttribute('aria-current', 'true');
+    else button.removeAttribute('aria-current');
+  });
+}, {passive: true});
