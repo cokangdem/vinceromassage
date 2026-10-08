@@ -64,5 +64,5 @@ export const SITE = {
   fallbackReviews: [],
 
   googleAppsScriptUrl:
-    'https://script.google.com/macros/s/AKfycbwTcxMU8xMhEsTEO4xldqo7BXekPd4aPqsOaGRto6VidQ9aIyKOffaNmhcUtPcgpXBA/exec'
+    'https://script.google.com/macros/s/AKfycbxWbZ12ueZULrkFhcsmvzotjPkCmgarMKmPKk_i3h2toEdoFUq8F7p7fnaUu5GvYltY/exec'
 };
