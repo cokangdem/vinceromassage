@@ -58,3 +58,9 @@ main{height:calc(100dvh - 190px)}
 .presentation .intro{margin:18px 0 12px}
 .presentation .journey{margin:0 0 18px}
 @media(max-width:720px){.presentation .intro,.presentation .journey{font-size:14px;line-height:1.65}.presentation .journey{margin-bottom:16px}}
+
+
+.reviews blockquote {
+  font-size: 15px;
+  line-height: 1.6;
+}
