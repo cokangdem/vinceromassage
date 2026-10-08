@@ -64,3 +64,24 @@ main{height:calc(100dvh - 190px)}
   font-size: 15px;
   line-height: 1.6;
 }
+
+/* Présentation sur toute la largeur de sa colonne */
+.presentation .intro,
+.presentation .journey {
+  max-width: none;
+  width: 100%;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.presentation .mood-image {
+  max-width: none;
+  width: 100%;
+}
+
+@media (max-width: 720px) {
+  .presentation .intro,
+  .presentation .journey {
+    font-size: 14px;
+  }
+}
