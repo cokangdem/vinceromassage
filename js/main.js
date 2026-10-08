@@ -61,7 +61,19 @@ function renderReviews(items = []) {
     const a = document.createElement('article');
     a.innerHTML = '<blockquote></blockquote><cite></cite><div class="stars"></div>';
     a.querySelector('blockquote').textContent = '“' + (r.message || '') + '”';
-    a.querySelector('cite').textContent = '— ' + (r.name || 'Anonyme');
+    a.querySelectconst date = r.date ? new Date(r.date) : null;
+
+const monthYear = date && Number.isFinite(date.getTime())
+  ? date.toLocaleDateString('fr-FR', {
+      month: 'long',
+      year: 'numeric',
+      timeZone: 'Europe/Paris'
+    })
+  : '';
+
+a.querySelector('cite').textContent =
+  '— ' + (r.name || 'Anonyme') +
+  (monthYear ? ' · ' + monthYear : '');or('cite').textContent = '— ' + (r.name || 'Anonyme');
     a.querySelector('.stars').textContent = r.rating ? stars(r.rating) : '';
     list.appendChild(a);
   });
