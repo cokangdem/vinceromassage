@@ -85,3 +85,10 @@ main{height:calc(100dvh - 190px)}
     font-size: 14px;
   }
 }
+
+/* Navigation utile seulement sur mobile */
+@media (min-width: 721px) {
+  header nav {
+    display: none;
+  }
+}
